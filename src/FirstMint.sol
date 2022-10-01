@@ -10,4 +10,8 @@ contract FirstMintContract is ERC721, Ownable {
     uint256 public maxSupply;
     bool public isMintEnabled;
     mapping(address => uint256) public mintedWallets;
+
+    constructor() payable ERC721("First Mint", "FIRSTMINT") {
+        maxSupply = 10;
+    }
 }
