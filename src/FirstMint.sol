@@ -14,4 +14,12 @@ contract FirstMintContract is ERC721, Ownable {
     constructor() payable ERC721("First Mint", "FIRSTMINT") {
         maxSupply = 10;
     }
+
+    function toggleIsMintEnabled() external onlyOwner {
+        isMintEnabled = !isMintEnabled;
+    }
+
+    function setMaxSupply(uint256 maxSupply_) external onlyOwner {
+        maxSupply = maxSupply_;
+    }
 }
