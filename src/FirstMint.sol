@@ -22,4 +22,16 @@ contract FirstMintContract is ERC721, Ownable {
     function setMaxSupply(uint256 maxSupply_) external onlyOwner {
         maxSupply = maxSupply_;
     }
+
+    function mint() external payable {
+        require(isMintEnabled, "minting not enabled");
+        require(mintedWallets[msg.sender] < 1, "exceeds max per wallet");
+        require(msg.value == mintPrice, "wrong value");
+        require(maxSupply > totalSupply, "sold out");
+
+        mintedWallets[msg.sender]++;
+        totalSupply++;
+        uint256 tokenId = totalSupply;
+        _mint(msg.sender, tokenId);
+    }
 }
